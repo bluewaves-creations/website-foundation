@@ -2,6 +2,14 @@
 
 > Generate videos with audio with Seedance 1.5
 
+> **This project uses Cloudflare AI Gateway** — not direct fal.ai calls.
+> All requests route through the gateway (no API key in code):
+> ```ts
+> const gatewayUrl = await env.AI.gateway(env.AI_GATEWAY_NAME).getUrl("fal");
+> await fetch(`${gatewayUrl}/fal-ai/model/endpoint`, { method: "POST", ... });
+> ```
+> See `src/lib/media.ts` for the implementation and `docs/GUIDE.md` § Media Generation for full details.
+> The cURL, Python, and JavaScript examples below are upstream fal.ai reference for schema details only.
 
 ## Overview
 

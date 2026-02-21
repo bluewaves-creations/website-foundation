@@ -11,7 +11,7 @@
 
 # Website Foundation
 
-A ready-to-use website template you can fork, fill with your own content, and deploy. Out of the box you get a **blog**, **gallery**, **contact form** with email delivery, **password-protected pages**, **AI-powered image and video generation**, dark mode, SEO, and responsive design — all running on Cloudflare's free tier.
+A ready-to-use website template. Click **Use this template** to create your own copy, replace the sample content, and deploy. Out of the box you get a **blog**, **gallery**, **contact form** with email delivery, **password-protected pages**, **AI-powered image and video generation**, dark mode, SEO, and responsive design — all running on Cloudflare's free tier.
 
 The sample brand is called "Wave Artisans." You'll replace it with your own name, logo, and content.
 
@@ -39,11 +39,10 @@ You need three things installed before you start. If you already have them, skip
 
 Git tracks changes to your files and lets you deploy your site.
 
-**macOS** (choose one):
+**macOS**:
 ```bash
 xcode-select --install
 ```
-or install via [Homebrew](https://brew.sh): `brew install git`
 
 **Windows**: Download from [git-scm.com/downloads/win](https://git-scm.com/downloads/win) and run the installer.
 
@@ -61,14 +60,11 @@ git --version
 
 Bun is a fast JavaScript runtime and package manager. It replaces Node.js for this project — **you do not need Node.js installed.**
 
-**macOS** (choose one):
-```bash
-brew install oven-sh/bun/bun
-```
-or:
+**macOS**:
 ```bash
 curl -fsSL https://bun.sh/install | bash
 ```
+Or via [Homebrew](https://brew.sh): `brew install oven-sh/bun/bun`
 
 **Windows** (PowerShell):
 ```powershell
@@ -98,8 +94,12 @@ That's it for now. You'll come back to the dashboard later when you deploy.
 
 ## Quick Start
 
+1. Click the green **Use this template** button at the top of this page
+2. Name your new repository and click **Create repository**
+3. Clone your new repo and start the dev server:
+
 ```bash
-git clone <repo-url> my-site
+git clone https://github.com/YOUR-USERNAME/YOUR-REPO.git my-site
 cd my-site
 bun install
 bun run dev

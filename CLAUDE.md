@@ -2,6 +2,18 @@
 
 Astro 5 + Tailwind CSS v4 + Cloudflare Workers website template. Hybrid SSR/prerender, content collections, AI Gateway media generation, email sending, Cloudflare Access auth. Package manager: **bun** (no npm/npx).
 
+## Cloud Environment (Web / iOS)
+
+When opened in a cloud sandbox (Claude Code web or iOS), browser-based `bunx wrangler login`
+does not work. Use a Cloudflare API Token instead:
+- Create at dash.cloudflare.com/profile/api-tokens → Custom Token
+- Required permissions: Workers Scripts (Edit), Workers AI (Edit),
+  Access: Apps and Policies (Edit), Email Routing Addresses (Edit)
+- Set as env var: `CLOUDFLARE_API_TOKEN`
+- Secrets use non-interactive form: `echo "value" | bunx wrangler secret put SECRET_NAME`
+
+For complete setup, deployment, and media generation guides, read `docs/GUIDE.md`.
+
 ## Commands
 
 ```bash
@@ -78,12 +90,21 @@ const posts = (await getCollection("blog"))
 - Buttons: `rounded-full` pill shape
 - Layout: `mx-auto max-w-6xl px-4 py-16`
 
-### AI Gateway (media generation)
+### Media Generation (via AI Gateway → fal.ai)
+
+Gateway URL pattern (async — must await):
 ```ts
-// env.AI.gateway(name).getUrl(provider) is async
 const gatewayUrl = await env.AI.gateway(env.AI_GATEWAY_NAME).getUrl("fal");
-// Then fetch directly — no API key needed (BYOK via AI Gateway)
 ```
+
+Models and endpoints:
+- **Text-to-image:** `fal-ai/bytedance/seedream/v4.5/text-to-image` ($0.04/image)
+- **Image editing:** `fal-ai/bytedance/seedream/v4.5/edit` ($0.04/image)
+- **Text-to-video:** `fal-ai/bytedance/seedance/v1.5/pro/text-to-video` (~$0.26/5s 720p)
+- **Image-to-video:** same endpoint as text-to-video + `image_url` parameter
+
+Existing lib: `src/lib/media.ts` — `generateImage()`, `generateVideo()`
+Full API schemas and payloads: `docs/GUIDE.md` § Media Generation
 
 ### Email
 ```ts
@@ -113,6 +134,12 @@ const user = await verifyAccessJwt(request, env);
 - `env.AI.gateway(name).getUrl(provider)` is **async** — must `await`
 - Image transforms (`/cdn-cgi/image/`) only work on Cloudflare-served domains
 - Client-side `<script>` tags are bundled by Astro; use `is:inline` to prevent bundling
+
+## Complete Operations Guide
+
+For first-time Cloudflare setup, AI Gateway configuration, environment variables,
+media generation API payloads, deployment procedures, content creation templates,
+and troubleshooting: read `docs/GUIDE.md`.
 
 ## Verification
 

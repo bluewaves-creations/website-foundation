@@ -15,6 +15,10 @@ Add a custom serif typeface to the `@theme` block for a more literary feel. Exte
 
 Pull quotes, drop caps, and footnotes all work through standard Markdown extensions or the typography plugin's built-in classes. The `prose-lg` class on detail pages already sets comfortable line lengths and spacing for long reads.
 
-## Why the Blueprint Fits
+## Build It with Claude Code
+
+Tell Claude Code "I want this to feel like a literary magazine — serif font, pull quotes, author bio sidebar" and it swaps the typeface in global.css, creates a PullQuote component, extends the blog schema with author references, and builds an author bio sidebar for the detail page layout. Every change follows the existing patterns — the editorial polish doesn't break the architecture.
+
+## Why the Foundation Fits
 
 Editorial publications thrive on structured content and fast page loads. The Content Layer API validates every article against its schema before build, catching broken front matter early. Server-rendered pages mean your journal works without JavaScript, respecting readers on slow connections.

@@ -1,18 +1,20 @@
 ---
-title: "Five Ways to Make the Blueprint Your Own"
-description: "Accent colors, custom fonts, new content collections, alternative page layouts, and API integrations — a practical guide to customizing the blueprint."
-author: "Wave Artisans"
+title: "Five Things to Build Together"
+description: "Accent colors, custom fonts, new content collections, alternative page layouts, and API integrations — a practical guide to customizing the foundation with Claude Code."
+author: "Website Foundation"
 publishedAt: 2026-02-15
 image: "/images/blog/customizing-the-blueprint.jpg"
 tags: ["customization", "tailwind", "guide"]
 draft: false
 ---
 
-The blueprint is designed to be forked and reshaped. Here are the five highest-impact changes you can make in an afternoon.
+The foundation is designed to be forked and reshaped. Here are the five highest-impact changes you can make — each one a natural conversation with Claude Code.
 
 ## 1. Add an Accent Color
 
-Open `src/styles/global.css` and add your brand color to the `@theme` block. The gray palette is already tuned to pair well with any hue:
+**With Claude Code**: "Add a deep teal accent color that works in both light and dark mode."
+
+Claude Code opens `src/styles/global.css`, adds your accent to the `@theme` block, and updates key components — buttons, links, active states — to use it. The gray palette is already tuned to pair well with any hue:
 
 ```css
 @theme {
@@ -21,11 +23,13 @@ Open `src/styles/global.css` and add your brand color to the `@theme` block. The
 }
 ```
 
-Then use it in your components — `bg-accent-500`, `text-accent-600`, `ring-accent-500/20`. The neutral grays make any accent color feel deliberate rather than bolted on.
+Then it uses `bg-accent-500`, `text-accent-600`, `ring-accent-500/20` across your components. The neutral grays make any accent color feel deliberate rather than bolted on.
 
 ## 2. Swap the Font
 
-Replace the Nunito Sans `@font-face` declarations with your typeface of choice. Update the theme variable and swap the files:
+**With Claude Code**: "Switch the font to Inter for a more modern feel."
+
+Claude Code replaces the Nunito Sans `@font-face` declarations with your typeface, updates the theme variable, swaps the files in `public/fonts/`, and adjusts the preload hints in `Base.astro`:
 
 ```css
 @theme {
@@ -33,11 +37,13 @@ Replace the Nunito Sans `@font-face` declarations with your typeface of choice. 
 }
 ```
 
-The `font-display: swap` strategy and `<link rel="preload">` hints in `Base.astro` are already wired up — just point them at your new font files in `public/fonts/`.
+The `font-display: swap` strategy is already wired up — Claude Code just points it at the new files.
 
 ## 3. Create New Collections
 
-Need a "projects" or "recipes" section? Define a new collection in `src/content.config.ts`:
+**With Claude Code**: "I need a 'projects' collection with fields for client name, year, and cover image. Add a listing page and detail pages."
+
+Claude Code defines the new collection in `src/content.config.ts`, creates the Markdown folder under `src/content/projects/`, builds a listing page at `src/pages/projects/index.astro`, and a detail page at `src/pages/projects/[slug].astro`. It follows the same pattern used by blog and gallery:
 
 ```typescript
 const projects = defineCollection({
@@ -52,30 +58,34 @@ const projects = defineCollection({
 });
 ```
 
-Add a Markdown folder under `src/content/projects/`, create a listing page at `src/pages/projects/index.astro`, and a detail page at `src/pages/projects/[slug].astro`. The pattern is identical for every collection.
+One conversation, and you have a fully functional new section — schema-validated, prerendered, and styled to match the rest of the site.
 
 ## 4. Rework the Layout
 
-The homepage is a vertical stack of sections — hero, blog, gallery, testimonials. Each section is self-contained and queries its own collection. Reorder them, remove what you don't need, or add new ones:
+**With Claude Code**: "Remove the gallery and testimonials from the homepage. Add a 'Services' section with three cards and a CTA button."
+
+Claude Code understands the homepage structure — each section is self-contained and queries its own collection. It removes the sections you don't need, creates a new Services section, and keeps the visual rhythm consistent:
 
 ```astro
 <!-- Swap the order or remove sections entirely -->
 <HeroSection />
-<ProjectsSection />    <!-- your new section -->
+<ServicesSection />    <!-- your new section -->
 <TestimonialsSection />
-<!-- Blog and Gallery removed -->
+<!-- Gallery removed -->
 ```
 
-The `border-t` divider between sections keeps the rhythm consistent no matter how many you include.
+The `border-t` divider between sections adapts no matter how many you include.
 
 ## 5. Wire Up New APIs
 
-The `src/pages/api/` directory is ready for new endpoints. Need a webhook receiver? Follow the existing pattern:
+**With Claude Code**: "Add a waitlist endpoint that stores email signups in KV and sends a confirmation email."
+
+Claude Code creates the API route following the existing pattern — parse JSON, validate, process, return a typed response — and adds the KV binding configuration:
 
 ```typescript
 export async function POST(context: APIContext) {
   const env = context.locals.runtime.env;
-  let body: { event: string; payload: unknown };
+  let body: { email: string };
   try {
     body = await context.request.json();
   } catch {
@@ -84,15 +94,12 @@ export async function POST(context: APIContext) {
       headers: { "Content-Type": "application/json" },
     });
   }
-  // Process the webhook...
-  return new Response(JSON.stringify({ received: true }), {
-    headers: { "Content-Type": "application/json" },
-  });
+  // Store in KV, send confirmation email, return success
 }
 ```
 
-Every API route has the same shape: parse JSON, validate, process, return a typed response. Cloudflare bindings give you access to KV, D1, R2, and Queues without any additional configuration.
+It writes the tests alongside the implementation, using the same `createMockEnv()` pattern the rest of the codebase uses. Cloudflare bindings give you access to KV, D1, R2, and Queues without any additional configuration.
 
-## Start Small
+## Start with a Conversation
 
-You don't have to change everything at once. The blueprint is intentionally minimal so that each customization is a clear, isolated step. Pick one of these five, ship it, and come back for the next.
+You don't have to build everything at once. Pick one of these five, describe what you want, and watch Claude Code implement it across every file that needs to change. Each customization is a clear, testable step — and the foundation is designed so that each step produces a coherent result.

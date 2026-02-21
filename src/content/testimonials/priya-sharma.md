@@ -6,4 +6,4 @@ rating: 5
 publishedAt: 2026-01-20
 ---
 
-The Tailwind v4 theming setup is exactly right — a neutral gray palette that lets you drop in any accent color and have it look intentional. I added our brand in about ten minutes and the whole site felt custom.
+I told Claude Code "add our brand — deep teal accent, Inter font, editorial layout with pull quotes." Ten minutes later everything was updated coherently — global.css, Base.astro, every component that needed the new color. The neutral gray palette made the accent feel like it had always been there.

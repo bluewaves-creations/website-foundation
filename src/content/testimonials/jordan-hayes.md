@@ -6,4 +6,4 @@ rating: 5
 publishedAt: 2026-01-25
 ---
 
-Most templates fall apart the moment you need real backend features. This one ships with Workers SSR, email sending, and Cloudflare Access auth out of the box. It felt production-ready from day one.
+I told Claude Code to add a waitlist endpoint with KV storage, protect admin pages with Cloudflare Access, and set up email notifications for new signups. Each feature came with tests, proper error handling, and the right Wrangler bindings. It felt like pair-programming with someone who already knew the whole codebase.

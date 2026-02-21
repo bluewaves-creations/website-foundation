@@ -1,6 +1,6 @@
 ---
 title: "Portfolio Studio"
-description: "A photographer's portfolio built on the blueprint — full-bleed gallery grid, lightbox detail views, and AI-generated hero images."
+description: "A photographer's portfolio built on the foundation — full-bleed gallery grid, lightbox detail views, and AI-generated hero images."
 image: "/images/gallery/portfolio-studio.jpg"
 category: "Portfolio"
 publishedAt: 2026-02-10
@@ -15,6 +15,10 @@ Swap the default square aspect ratio for a masonry or mixed-ratio layout to let 
 
 Cloudflare Image Transforms resize on the fly, so you upload once at full resolution and serve optimized variants to every device. Pair that with the `loading="lazy"` attribute already on every gallery image, and your portfolio loads fast even with dozens of high-resolution shots.
 
-## Why the Blueprint Fits
+## Build It with Claude Code
+
+Tell Claude Code "add a lightbox with keyboard navigation to the gallery" and it creates the lightbox component with arrow-key and escape-key handlers, wires it into the gallery detail page, adds the overlay styling with backdrop blur, and ensures it works in both light and dark mode. One conversation, fully functional.
+
+## Why the Foundation Fits
 
 A portfolio site is mostly static content with occasional updates — exactly the prerendered sweet spot. Every gallery page is generated at build time, cached at the edge, and served in under 50ms worldwide.

@@ -15,6 +15,10 @@ Add a `section` and `order` field to the blog schema to group pages into logical
 
 For versioned docs, add a `version` field to the schema and filter by it in your listing pages. Each major release gets its own set of Markdown files, and a version switcher in the header lets readers toggle between them.
 
-## Why the Blueprint Fits
+## Build It with Claude Code
+
+Tell Claude Code "I need a docs site with sidebar navigation, versioning, and search" and it extends the content schema with section, order, and version fields, creates a collapsible sidebar component that builds its tree from the collection query, adds a version switcher to the header, and builds a search API route with a build-time index. The whole documentation architecture comes together coherently — every component following the same patterns.
+
+## Why the Foundation Fits
 
 Developer documentation needs to be fast, searchable, and easy to maintain. Markdown-based content means engineers can submit doc changes through pull requests — the same workflow they use for code. Prerendered pages load instantly, and the typography plugin ensures code blocks, tables, and inline code all render cleanly.

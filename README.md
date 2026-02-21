@@ -3,6 +3,7 @@
 </p>
 
 <p align="center">
+  <img src="https://img.shields.io/badge/Claude_Code-Plugin-8A2BE2?logo=data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0id2hpdGUiPjxwYXRoIGQ9Ik0xMiAyQzYuNDggMiAyIDYuNDggMiAxMnM0LjQ4IDEwIDEwIDEwIDEwLTQuNDggMTAtMTBTMTcuNTIgMiAxMiAyem0wIDE4Yy00LjQyIDAtOC0zLjU4LTgtOHMzLjU4LTggOC04IDggMy41OCA4IDgtMy41OCA4LTggOHoiLz48L3N2Zz4=&logoColor=white" alt="Claude Code Plugin" />
   <img src="https://img.shields.io/badge/Astro-5-BC52EE?logo=astro&logoColor=white" alt="Astro 5" />
   <img src="https://img.shields.io/badge/Tailwind_CSS-v4-06B6D4?logo=tailwindcss&logoColor=white" alt="Tailwind CSS v4" />
   <img src="https://img.shields.io/badge/Cloudflare_Workers-F38020?logo=cloudflareworkers&logoColor=white" alt="Cloudflare Workers" />
@@ -11,9 +12,30 @@
 
 # Website Foundation
 
-A ready-to-use website template. Click **Use this template** to create your own copy, replace the sample content, and deploy. Out of the box you get a **blog**, **gallery**, **contact form** with email delivery, **password-protected pages**, **AI-powered image and video generation**, dark mode, SEO, and responsive design — all running on Cloudflare's free tier.
+Start a conversation, shape a website. The Website Foundation is a production-ready template designed to be built together with [Claude Code](https://claude.ai/claude-code) — you describe what you want, Claude Code implements it across layouts, styles, routes, and tests, all at once. Out of the box you get a **blog**, **gallery**, **contact form** with email delivery, **password-protected pages**, **AI-powered image and video generation**, dark mode, SEO, and responsive design — all running on Cloudflare's free tier.
 
-The sample brand is called "Wave Artisans." You'll replace it with your own name, logo, and content.
+The template ships with a complete Claude Code plugin: **10 slash commands**, **8 knowledge skills**, **2 specialized agents**, and **quality hooks** — giving Claude Code deep knowledge of the project's architecture, patterns, and conventions.
+
+The sample brand is called "Wave Artisans." You'll replace it with your own name, logo, and content — or tell Claude Code `/rebrand` and describe your business.
+
+---
+
+## Built for Claude Code
+
+Building with Claude Code means you describe your intent and get coherent, multi-file implementation. Not one file at a time — every file that needs to change, all following the same patterns, all building correctly.
+
+The plugin system makes this practical:
+
+- **10 slash commands** — `/new-post`, `/new-gallery-item`, `/rebrand`, `/deploy`, `/check`, and more. Each handles a complete workflow in one step.
+- **8 knowledge skills** — Architecture, styling patterns, content schemas, Cloudflare bindings, testing conventions. Claude Code understands this specific project, not just generic web development.
+- **2 specialized agents** — For complex multi-step tasks like full-site audits and component creation.
+- **Quality hooks** — Automated checks that catch issues before they reach production.
+
+**Your first 5 minutes**: Clone the repo, open it in Claude Code, and say "rebrand this to my photography business called Lens & Light." Watch it update the site title, meta descriptions, header logo reference, footer text, homepage hero, and Open Graph metadata — all coherently, in one pass. Then say "add a portfolio page with client galleries." That's what building together looks like.
+
+This isn't a gimmick. Every implementation follows the documented patterns in CLAUDE.md, produces testable code, and builds correctly. The plugin gives Claude Code the project knowledge to make changes that are architecturally sound — not just syntactically correct.
+
+---
 
 ## What You Get
 
@@ -28,6 +50,45 @@ The sample brand is called "Wave Artisans." You'll replace it with your own name
 | **AI media tools** | Generate images and videos from text prompts (protected behind login) |
 | **SEO** | Sitemap, Open Graph tags, canonical URLs, meta descriptions |
 | **Performance** | Static pages are prerendered at build time; dynamic pages run at the edge |
+| **Claude Code plugin** | 10 commands, 8 skills, 2 agents, quality hooks — deep project knowledge for AI collaboration |
+
+---
+
+## Working with Claude Code
+
+Claude Code isn't a side feature — it's how this template is designed to be used. Here's what the collaboration looks like in practice.
+
+### Common Workflows
+
+**Content creation** — "Write a blog post about our product launch next week" produces a properly frontmattered Markdown file with the right schema, ready to publish.
+
+**Component modification** — "Make the testimonials section a horizontal carousel instead of a grid" updates the component, adds the scroll behavior, handles touch gestures, and keeps dark mode working.
+
+**Theming** — "Add our brand colors: navy blue primary, coral accent" updates global.css, applies the colors to buttons, links, and active states, and ensures contrast ratios work in both light and dark mode.
+
+**Deployment** — "Deploy to Cloudflare" runs the build, checks for errors, and deploys. If something fails, Claude Code reads the error and fixes it.
+
+### Slash Commands
+
+| Command | What it does |
+|---------|-------------|
+| `/new-post` | Create a new blog post with proper frontmatter |
+| `/new-gallery-item` | Add a gallery item with category and tags |
+| `/rebrand` | Update all branding touchpoints at once |
+| `/deploy` | Build, verify, and deploy to Cloudflare |
+| `/check` | Run TypeScript checks, tests, and build verification |
+
+### Example Prompts That Work Well
+
+- "Add a 'Services' section to the homepage with three cards for consulting, development, and design"
+- "Create a new 'projects' collection with fields for client, year, and technologies"
+- "Make the gallery masonry-style instead of a uniform grid"
+- "Add an RSS feed at /feed.xml"
+- "Set up a waitlist API endpoint that stores signups in KV"
+
+### How It Works
+
+The `CLAUDE.md` file in the project root gives Claude Code a complete understanding of the architecture — build commands, file conventions, component patterns, API route structure, testing approach, and common gotchas. The plugin adds slash commands for frequent tasks, knowledge skills for deeper context, and hooks for quality assurance. Together, they make Claude Code a partner that understands this specific project, not just a generic coding assistant.
 
 ---
 
@@ -117,11 +178,13 @@ Work through these in order. Each change shows up instantly in your browser.
 
 ### 1. Site Name and Branding
 
+> **With Claude Code**: `/rebrand` walks you through every change at once — site title, meta descriptions, header, footer, and homepage hero, all updated coherently.
+
 Replace "Wave Artisans" with your own name in these files:
 
 | File | What to change |
 |------|---------------|
-| `src/pages/index.astro` (line 23) | `<Base title="Wave Artisans — Website Blueprint">` — change to your site title |
+| `src/pages/index.astro` (line 23) | `<Base title="...">` — change to your site title |
 | `src/layouts/Base.astro` (line 15) | Default meta description — change the fallback text |
 | `src/components/Header.astro` (line 19) | Logo `src` and `alt` text |
 | `src/components/Footer.astro` (lines 9–13) | Copyright name and contact email |
@@ -143,6 +206,8 @@ to your actual domain (e.g., `"https://mysite.com"`). This URL is used for the s
 
 ### 3. Content
 
+> **With Claude Code**: "Write a blog post about [topic]" or `/new-post` creates a properly structured Markdown file with the right schema. Same for gallery items with `/new-gallery-item`.
+
 All content lives in `src/content/` as Markdown files. Delete the sample files and create your own.
 
 Here's how to create a new blog post — add a file like `src/content/blog/my-first-post.md`:
@@ -163,6 +228,8 @@ See the [Content Collections Reference](#content-collections-reference) below fo
 
 ### 4. Colors
 
+> **With Claude Code**: "Add a deep teal accent color that works in both light and dark mode" — Claude Code updates global.css and applies the color across components.
+
 The template ships with a neutral gray palette so your accent color stands out. To add one, edit `src/styles/global.css` and add your accent inside the `@theme` block:
 
 ```css
@@ -177,6 +244,8 @@ Then use `accent-500`, `accent-600`, etc. in your Tailwind classes.
 
 ### 5. Fonts
 
+> **With Claude Code**: "Switch the font to Inter" — Claude Code swaps the font files, updates the CSS declarations, and adjusts the preload hints.
+
 The template uses Nunito Sans, self-hosted in `public/fonts/`. To change it:
 
 1. Replace the `.ttf` files in `public/fonts/` with your font files
@@ -184,6 +253,8 @@ The template uses Nunito Sans, self-hosted in `public/fonts/`. To change it:
 3. Update `--font-sans` in the `@theme` block to match your new font name
 
 ### 6. Logos and Favicons
+
+> **With Claude Code**: "Update the logo to use our new SVG" — Claude Code updates the header component and favicon references.
 
 Replace these files with your own:
 
@@ -215,6 +286,8 @@ bunx wrangler whoami
 ```
 
 ### 2. Deploy
+
+> **With Claude Code**: `/deploy` handles the build, verification, and deployment in one step. If something fails, Claude Code reads the error and fixes it.
 
 ```bash
 bun run deploy
@@ -492,6 +565,12 @@ public/
 tests/
   unit/                    # Unit tests
   integration/             # Integration tests
+.claude/
+  plugin.json              # Claude Code plugin manifest
+  commands/                # 10 slash commands
+  skills/                  # 8 knowledge skills
+  agents/                  # 2 specialized agents
+  hooks/                   # Quality hooks
 ```
 
 ---
@@ -559,19 +638,6 @@ CONTACT_EMAIL=you@example.com
 POLICY_AUD=your-aud-tag
 TEAM_DOMAIN=your-team
 ```
-
----
-
-## Using with Claude Code
-
-This template is designed to work well from Claude Code on web, iOS, and desktop:
-
-1. **Clone the repo** and open it in Claude Code
-2. **Add content** — ask Claude to create new blog posts, gallery items, or testimonials as Markdown files in `src/content/`
-3. **Customize theming** — ask Claude to add your brand colors to `global.css`
-4. **Modify components** — ask Claude to adjust layouts, add sections, or create new components
-5. **Generate media** — use the API endpoints to generate images and videos for your content
-6. **Deploy** — run `bun run deploy` to build and publish to Cloudflare
 
 ---
 
@@ -744,6 +810,7 @@ bunx vitest run tests/unit/specific-test.test.ts
 - [Astro 5](https://astro.build) — Static site generator with hybrid SSR
 - [Tailwind CSS v4](https://tailwindcss.com) — Utility-first CSS with `@theme` directive and OKLCH colors
 - [Cloudflare Workers](https://workers.cloudflare.com) — Edge SSR, AI Gateway, Email Routing, Access
+- [Claude Code](https://claude.ai/claude-code) — AI creative partner with deep project knowledge via plugin system
 - [fal.ai](https://fal.ai) — Image generation (Seedream v4.5) and video generation (Seedance 1.5 Pro)
 - [jose](https://github.com/panva/jose) — JWT verification for Cloudflare Access
 - [Vitest](https://vitest.dev) — Unit and integration testing

@@ -1,0 +1,8 @@
+{
+  "name": "website-foundation",
+  "version": "1.0.0",
+  "description": "Full-stack assistant for the Website Foundation template — content creation, branding, Cloudflare deployment, AI media generation, and diagnostics.",
+  "author": { "name": "Website Foundation" },
+  "license": "MIT",
+  "keywords": ["astro", "cloudflare", "tailwind", "website", "blog", "gallery"]
+}

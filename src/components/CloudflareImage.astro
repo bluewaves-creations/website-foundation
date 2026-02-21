@@ -1,0 +1,38 @@
+---
+import { buildImageUrl } from "../lib/cloudflare-image";
+
+interface Props {
+  src: string;
+  alt: string;
+  width?: number;
+  height?: number;
+  quality?: number;
+  format?: string;
+  fit?: "cover" | "contain" | "crop" | "scale-down";
+  class?: string;
+  loading?: "lazy" | "eager";
+}
+
+const {
+  src,
+  alt,
+  width,
+  height,
+  quality,
+  format,
+  fit,
+  class: className,
+  loading = "lazy",
+} = Astro.props;
+
+const imageUrl = buildImageUrl(src, { width, height, quality, format, fit });
+---
+
+<img
+  src={imageUrl}
+  alt={alt}
+  width={width}
+  height={height}
+  loading={loading}
+  class={className}
+/>

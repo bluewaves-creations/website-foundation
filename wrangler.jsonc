@@ -1,0 +1,20 @@
+{
+  "name": "website-foundation",
+  "compatibility_date": "2025-01-01",
+  "compatibility_flags": ["nodejs_compat"],
+  // AI Gateway binding for fal.ai media generation
+  "ai": {
+    "binding": "AI",
+    "remote": true
+  },
+  // Email sending binding
+  "send_email": [
+    {
+      "name": "SEND_EMAIL",
+      "destination_address": "${CONTACT_EMAIL}"
+    }
+  ],
+  "vars": {
+    "AI_GATEWAY_NAME": "website-foundation"
+  }
+}

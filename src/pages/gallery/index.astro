@@ -1,0 +1,30 @@
+---
+import { getCollection } from "astro:content";
+import Base from "../../layouts/Base.astro";
+import GalleryCard from "../../components/GalleryCard.astro";
+
+export const prerender = true;
+
+const items = (await getCollection("gallery"))
+  .sort((a, b) => b.data.publishedAt.getTime() - a.data.publishedAt.getTime());
+---
+
+<Base title="Gallery — Wave Artisans" description="Conceptual sites you can build with the blueprint.">
+  <section class="mx-auto max-w-6xl px-4 pt-16 pb-20 sm:pt-20 sm:pb-24">
+    <h1 class="text-3xl sm:text-4xl font-bold leading-tight tracking-tight text-gray-900 dark:text-gray-100">Gallery</h1>
+    <p class="mt-4 text-lg text-gray-600 dark:text-gray-400">
+      Conceptual sites you can build with the blueprint.
+    </p>
+    <div class="mt-10 grid gap-3 grid-cols-2 lg:grid-cols-3">
+      {items.map((item) => (
+        <GalleryCard
+          title={item.data.title}
+          description={item.data.description}
+          image={item.data.image}
+          slug={item.id}
+          category={item.data.category}
+        />
+      ))}
+    </div>
+  </section>
+</Base>

@@ -1,0 +1,40 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+/* Class-based dark mode — Tailwind v4 @custom-variant syntax */
+@custom-variant dark (&:where(.dark, .dark *));
+
+@font-face {
+  font-family: "Nunito Sans";
+  src: url("/fonts/NunitoSans-Variable.ttf") format("truetype");
+  font-weight: 200 1000;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Nunito Sans";
+  src: url("/fonts/NunitoSans-Variable-Italic.ttf") format("truetype");
+  font-weight: 200 1000;
+  font-style: italic;
+  font-display: swap;
+}
+
+@theme {
+  --font-sans: "Nunito Sans", sans-serif;
+
+  /* Gray palette — OKLCH, dark to light */
+  --color-gray-950: oklch(22.73% 0.0038 285.98);
+  --color-gray-900: oklch(29.39% 0.0036 286.02);
+  --color-gray-800: oklch(34.92% 0.0035 286.03);
+  --color-gray-700: oklch(40.24% 0.0033 286.02);
+  --color-gray-600: oklch(50.07% 0.0047 286.03);
+  --color-gray-500: oklch(64.83% 0.0074 286.03);
+  --color-gray-400: oklch(75.20% 0.0057 286.01);
+  --color-gray-300: oklch(83.12% 0.0070 286.02);
+  --color-gray-200: oklch(86.22% 0.0069 286.02);
+  --color-gray-100: oklch(92.33% 0.0068 286.01);
+  --color-gray-50: oklch(96.26% 0.0067 286.00);
+
+  /* No accent color — each site instance adds its own */
+}

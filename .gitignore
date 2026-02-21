@@ -1,0 +1,24 @@
+# build output
+dist/
+
+# generated types
+.astro/
+
+# dependencies
+node_modules/
+
+# environment variables
+.env
+.env.local
+.env.production
+.dev.vars
+
+# cloudflare
+.wrangler/
+
+# editor
+.vscode/
+.idea/
+
+# os
+.DS_Store

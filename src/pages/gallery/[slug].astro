@@ -1,0 +1,51 @@
+---
+import { getCollection, render } from "astro:content";
+import Base from "../../layouts/Base.astro";
+import Button from "../../components/Button.astro";
+
+export const prerender = true;
+
+export async function getStaticPaths() {
+  const items = await getCollection("gallery");
+  return items.map((item) => ({
+    params: { slug: item.id },
+    props: { item },
+  }));
+}
+
+const { item } = Astro.props;
+const { Content } = await render(item);
+---
+
+<Base title={item.data.title} description={item.data.description} image={item.data.image}>
+  <article class="mx-auto max-w-4xl px-4 pt-12 pb-20 sm:pt-16 sm:pb-24">
+    <Button href="/gallery" variant="ghost" size="sm" class="mb-6">&larr; Back to Gallery</Button>
+
+    <img
+      src={item.data.image}
+      alt={item.data.title}
+      class="w-full rounded-2xl object-cover"
+      loading="eager"
+    />
+
+    <div class="mt-8">
+      <span class="text-sm font-medium text-gray-500 dark:text-gray-400">{item.data.category}</span>
+      <h1 class="mt-2 text-3xl font-bold text-gray-900 dark:text-gray-100">{item.data.title}</h1>
+      <p class="mt-4 text-lg text-gray-600 dark:text-gray-400">{item.data.description}</p>
+
+      {item.data.tags.length > 0 && (
+        <div class="mt-4 flex flex-wrap gap-2">
+          {item.data.tags.map((tag) => (
+            <span class="rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-700 dark:bg-gray-800 dark:text-gray-300">
+              {tag}
+            </span>
+          ))}
+        </div>
+      )}
+
+      <div class="prose prose-gray mt-8 max-w-none dark:prose-invert">
+        <Content />
+      </div>
+    </div>
+  </article>
+</Base>

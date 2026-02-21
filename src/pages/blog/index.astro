@@ -1,0 +1,56 @@
+---
+import { getCollection } from "astro:content";
+import Base from "../../layouts/Base.astro";
+import BlogCard from "../../components/BlogCard.astro";
+
+export const prerender = true;
+
+const posts = (await getCollection("blog"))
+  .filter((p) => !p.data.draft)
+  .sort((a, b) => b.data.publishedAt.getTime() - a.data.publishedAt.getTime());
+
+const [featuredPost, ...remainingPosts] = posts;
+---
+
+<Base title="Blog — Wave Artisans" description="Articles on building with the Wave Artisans blueprint.">
+  <section class="mx-auto max-w-6xl px-4 pt-16 pb-20 sm:pt-20 sm:pb-24">
+    <h1 class="text-3xl sm:text-4xl font-bold leading-tight tracking-tight text-gray-900 dark:text-gray-100">Blog</h1>
+    <p class="mt-4 text-lg text-gray-600 dark:text-gray-400">
+      Articles on building, customizing, and deploying with the blueprint.
+    </p>
+    {featuredPost && (
+      <div class="space-y-12">
+        <div class="mt-10">
+          <BlogCard
+            title={featuredPost.data.title}
+            description={featuredPost.data.description}
+            slug={featuredPost.id}
+            publishedAt={featuredPost.data.publishedAt}
+            author={featuredPost.data.author}
+            image={featuredPost.data.image}
+            tags={featuredPost.data.tags}
+            featured={true}
+          />
+        </div>
+        {remainingPosts.length > 0 && (
+          <>
+            <hr class="border-gray-200 dark:border-gray-800" />
+            <div class="grid gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
+              {remainingPosts.map((post) => (
+                <BlogCard
+                  title={post.data.title}
+                  description={post.data.description}
+                  slug={post.id}
+                  publishedAt={post.data.publishedAt}
+                  author={post.data.author}
+                  image={post.data.image}
+                  tags={post.data.tags}
+                />
+              ))}
+            </div>
+          </>
+        )}
+      </div>
+    )}
+  </section>
+</Base>

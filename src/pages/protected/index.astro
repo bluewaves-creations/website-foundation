@@ -1,0 +1,27 @@
+---
+import Base from "../../layouts/Base.astro";
+import { verifyAccessJwt } from "../../lib/access";
+
+// SSR — no prerender (requires JWT verification)
+const env = Astro.locals.runtime.env;
+const user = await verifyAccessJwt(Astro.request, env);
+
+if (!user) {
+  return new Response("Unauthorized", { status: 403 });
+}
+---
+
+<Base title="Protected Area — Wave Artisans">
+  <section class="mx-auto max-w-3xl px-4 py-16">
+    <h1 class="text-4xl font-bold tracking-tight text-gray-900 dark:text-gray-100">Protected Area</h1>
+    <p class="mt-4 text-lg text-gray-600 dark:text-gray-400">
+      Welcome, {user.email}. This content is protected by Cloudflare Access.
+    </p>
+    <div class="mt-8 rounded-2xl bg-gray-50 p-6 shadow-sm ring-1 ring-gray-200 dark:bg-gray-900 dark:ring-gray-800">
+      <h2 class="text-lg font-bold text-gray-900 dark:text-gray-100">Gated Content</h2>
+      <p class="mt-2 text-sm text-gray-600 dark:text-gray-400">
+        This is placeholder content visible only to authenticated users. Replace this with your protected content.
+      </p>
+    </div>
+  </section>
+</Base>

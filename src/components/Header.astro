@@ -1,0 +1,105 @@
+---
+import ThemeToggle from "./ThemeToggle.astro";
+
+const navLinks = [
+  { href: "/", label: "Home" },
+  { href: "/blog", label: "Blog" },
+  { href: "/gallery", label: "Gallery" },
+  { href: "/contact", label: "Contact" },
+];
+
+const currentPath = Astro.url.pathname;
+---
+
+<header class="sticky top-0 z-50 border-b border-gray-200 bg-gray-50/80 backdrop-blur-md dark:border-gray-800 dark:bg-gray-950/80">
+  <div class="mx-auto flex max-w-6xl items-center justify-between px-4 py-3">
+    <!-- Logo -->
+    <a href="/" class="block">
+      <img
+        src="/wave-artisan-logo.svg"
+        alt="Wave Artisans"
+        class="h-7 w-auto dark:invert"
+      />
+    </a>
+
+    <!-- Desktop nav -->
+    <nav class="hidden items-center gap-6 md:flex">
+      {navLinks.map(({ href, label }) => (
+        <a
+          href={href}
+          class:list={[
+            "text-sm font-medium transition-colors",
+            currentPath === href || (href !== "/" && currentPath.startsWith(href))
+              ? "text-gray-900 dark:text-gray-100"
+              : "text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100",
+          ]}
+        >
+          {label}
+        </a>
+      ))}
+      <ThemeToggle />
+    </nav>
+
+    <!-- Mobile menu button -->
+    <div class="flex items-center gap-2 md:hidden">
+      <ThemeToggle />
+      <button
+        id="mobile-menu-btn"
+        type="button"
+        aria-label="Toggle menu"
+        aria-expanded="false"
+        class="rounded-lg p-2 text-gray-600 hover:bg-gray-200 dark:text-gray-400 dark:hover:bg-gray-800"
+      >
+        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile nav -->
+  <nav id="mobile-menu" class="hidden border-t border-gray-200 px-4 pb-4 dark:border-gray-800 md:hidden">
+    {navLinks.map(({ href, label }) => (
+      <a
+        href={href}
+        class:list={[
+          "block py-2 text-sm font-medium transition-colors",
+          currentPath === href || (href !== "/" && currentPath.startsWith(href))
+            ? "text-gray-900 dark:text-gray-100"
+            : "text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100",
+        ]}
+      >
+        {label}
+      </a>
+    ))}
+  </nav>
+</header>
+
+<script>
+  const btn = document.getElementById("mobile-menu-btn") as HTMLButtonElement | null;
+  const menu = document.getElementById("mobile-menu");
+
+  function toggleMenu() {
+    const isOpen = !menu?.classList.toggle("hidden");
+    btn?.setAttribute("aria-expanded", String(!isOpen));
+  }
+
+  btn?.addEventListener("click", toggleMenu);
+
+  // Close on Escape
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && menu && !menu.classList.contains("hidden")) {
+      menu.classList.add("hidden");
+      btn?.setAttribute("aria-expanded", "false");
+      btn?.focus();
+    }
+  });
+
+  // Close when a nav link is clicked
+  menu?.querySelectorAll("a").forEach((link) => {
+    link.addEventListener("click", () => {
+      menu.classList.add("hidden");
+      btn?.setAttribute("aria-expanded", "false");
+    });
+  });
+</script>

@@ -217,10 +217,10 @@ bunx wrangler whoami
 ### 2. Deploy
 
 ```bash
-bunx wrangler deploy
+bun run deploy
 ```
 
-Wrangler reads `wrangler.jsonc`, builds your site, and uploads it. Your site is now live at:
+This builds your site and uploads it to Cloudflare. Your site is now live at:
 
 ```
 https://website-foundation.<your-subdomain>.workers.dev
@@ -263,15 +263,13 @@ bunx wrangler secret put CONTACT_EMAIL
 
 You'll be prompted to enter the email address where contact form submissions should be sent.
 
-**For local development**, create a `.dev.vars` file in the project root:
+**For local development**, copy the example file:
 
-```
-CONTACT_EMAIL=you@example.com
-POLICY_AUD=your-aud-tag
-TEAM_DOMAIN=your-team
+```bash
+cp .dev.vars.example .dev.vars
 ```
 
-> **Note**: `.dev.vars` is already in `.gitignore` so it won't be committed to your repository.
+Then edit `.dev.vars` with your values. This file is already in `.gitignore` so it won't be committed.
 
 ---
 
@@ -294,7 +292,7 @@ The contact form at `/contact` sends emails using Cloudflare Email Routing.
    bunx wrangler secret put CONTACT_EMAIL
    ```
 6. Open `wrangler.jsonc` and confirm the `destination_address` matches your verified email
-7. Re-deploy: `bunx wrangler deploy`
+7. Re-deploy: `bun run deploy`
 
 **Test it**: Visit `/contact` on your live site, submit a message, and check your inbox.
 
@@ -346,7 +344,7 @@ Cloudflare Access adds a login screen in front of `/protected` pages. Only peopl
    bunx wrangler secret put TEAM_DOMAIN
    # Enter your org name (e.g., "myteam") when prompted
    ```
-8. Re-deploy: `bunx wrangler deploy`
+8. Re-deploy: `bun run deploy`
 
 **Test it**: Visit `/protected` on your live site. You should see a Cloudflare login page. Enter an authorized email, check for the one-time PIN, and log in.
 
@@ -359,7 +357,7 @@ Not used by the default template, but `@astrojs/cloudflare` supports server-side
    bunx wrangler kv namespace create SESSION
    ```
 2. Copy the output and add a `kv_namespaces` entry to `wrangler.jsonc`
-3. Re-deploy: `bunx wrangler deploy`
+3. Re-deploy: `bun run deploy`
 
 ---
 
@@ -509,7 +507,7 @@ tests/
 | `bun run check` | Run TypeScript checks |
 | `bun run test` | Run all tests (42 tests across 7 files) |
 | `bun run test:watch` | Run tests in watch mode |
-| `bunx wrangler deploy` | Deploy to Cloudflare |
+| `bun run deploy` | Build and deploy to Cloudflare |
 
 ---
 
@@ -573,7 +571,7 @@ This template is designed to work well from Claude Code on web, iOS, and desktop
 3. **Customize theming** — ask Claude to add your brand colors to `global.css`
 4. **Modify components** — ask Claude to adjust layouts, add sections, or create new components
 5. **Generate media** — use the API endpoints to generate images and videos for your content
-6. **Deploy** — run `bunx wrangler deploy` to publish to Cloudflare
+6. **Deploy** — run `bun run deploy` to build and publish to Cloudflare
 
 ---
 
@@ -611,7 +609,38 @@ This is expected when building locally — the `cloudflare:email` module only ex
 bun run dev
 ```
 
-The production build (`bun run build`) will succeed when deployed via `bunx wrangler deploy`.
+The production build (`bun run build`) will succeed when deployed via `bun run deploy`.
+</details>
+
+<details>
+<summary>Deploy fails with "Missing entry-point"</summary>
+
+Wrangler needs the build output to exist before deploying. Always use:
+
+```bash
+bun run deploy
+```
+
+This runs `astro build` first, then `wrangler deploy`. If you run `bunx wrangler deploy` directly without building, the `dist/_worker.js/index.js` entry-point won't exist and the deploy will fail.
+</details>
+
+<details>
+<summary>Authentication error when deploying</summary>
+
+**Interactive use** — log in via the browser:
+
+```bash
+bunx wrangler login
+```
+
+**CI/CD** — create an API token at [dash.cloudflare.com/profile/api-tokens](https://dash.cloudflare.com/profile/api-tokens) with these permissions:
+
+- Account / Workers Scripts: Edit
+- Account / Workers AI: Edit
+- Account / Access: Apps and Policies: Edit
+- Zone / Email Routing Addresses: Edit
+
+Then set `CLOUDFLARE_API_TOKEN` as an environment variable in your CI pipeline.
 </details>
 
 <details>
@@ -624,7 +653,7 @@ Check each of these:
 - [ ] The destination email address is verified (check for a verification email from Cloudflare)
 - [ ] You're using a custom domain, not a `*.workers.dev` URL
 - [ ] The `destination_address` in `wrangler.jsonc` matches your verified email
-- [ ] You re-deployed after making changes (`bunx wrangler deploy`)
+- [ ] You re-deployed after making changes (`bun run deploy`)
 </details>
 
 <details>

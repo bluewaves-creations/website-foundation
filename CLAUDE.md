@@ -11,7 +11,7 @@ bun run preview      # Preview production build
 bun run check        # TypeScript checks (astro check)
 bun run test         # Vitest (42 tests, 7 files)
 bun run test:watch   # Vitest in watch mode
-bunx wrangler deploy # Deploy to Cloudflare
+bun run deploy     # Build + deploy to Cloudflare
 ```
 
 ## Architecture

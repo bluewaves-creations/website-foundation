@@ -1,17 +1,25 @@
 {
   "name": "website-foundation",
+  "main": "dist/_worker.js/index.js",
   "compatibility_date": "2025-01-01",
   "compatibility_flags": ["nodejs_compat"],
+  "assets": {
+    "binding": "ASSETS",
+    "directory": "./dist"
+  },
+  "observability": {
+    "enabled": true
+  },
   // AI Gateway binding for fal.ai media generation
   "ai": {
     "binding": "AI",
     "remote": true
   },
-  // Email sending binding
+  // Email sending binding — change the address to your verified email
   "send_email": [
     {
       "name": "SEND_EMAIL",
-      "destination_address": "${CONTACT_EMAIL}"
+      "destination_address": "you@example.com"
     }
   ],
   "vars": {

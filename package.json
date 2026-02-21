@@ -9,6 +9,7 @@
     "check": "astro check",
     "test": "vitest run",
     "test:watch": "vitest",
+    "deploy": "astro build && wrangler deploy",
     "astro": "astro"
   },
   "dependencies": {

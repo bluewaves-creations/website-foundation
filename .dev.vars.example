@@ -1,0 +1,7 @@
+# Copy this file to .dev.vars for local development
+# These are Cloudflare Worker secrets — not committed to git
+# For production, set them with: bunx wrangler secret put <NAME>
+
+CONTACT_EMAIL=you@example.com
+POLICY_AUD=your-access-application-aud-tag
+TEAM_DOMAIN=your-cloudflare-access-team-name

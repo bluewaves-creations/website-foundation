@@ -135,6 +135,17 @@ const user = await verifyAccessJwt(request, env);
 - Image transforms (`/cdn-cgi/image/`) only work on Cloudflare-served domains
 - Client-side `<script>` tags are bundled by Astro; use `is:inline` to prevent bundling
 
+## Claude Code Configuration
+
+Skills, agents, and hooks live in `.claude/`:
+
+- **Skills** (18 total): `.claude/skills/<name>/SKILL.md` — invoke with `/<name>`
+  - 10 task skills (user-invoked, `disable-model-invocation: true`): deploy, preflight, rebrand, new-post, new-gallery, new-testimonial, new-promoted, new-page, new-component, new-api-route
+  - 8 reference skills (auto-discovered by Claude): getting-started, content-collections, brand-customization, cloudflare-features, astro-patterns, media-generation, testing, deploy-and-ops
+- **Agents** (2): `.claude/agents/` — content-writer (Sonnet), site-doctor
+- **Hooks**: `.claude/settings.json` — PostToolUse validates content frontmatter on Write/Edit in `src/content/`
+- **Hook scripts**: `.claude/hooks/scripts/validate-content.sh`
+
 ## Complete Operations Guide
 
 For first-time Cloudflare setup, AI Gateway configuration, environment variables,

@@ -3,7 +3,7 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/Claude_Code-Plugin-8A2BE2?logo=data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0id2hpdGUiPjxwYXRoIGQ9Ik0xMiAyQzYuNDggMiAyIDYuNDggMiAxMnM0LjQ4IDEwIDEwIDEwIDEwLTQuNDggMTAtMTBTMTcuNTIgMiAxMiAyem0wIDE4Yy00LjQyIDAtOC0zLjU4LTgtOHMzLjU4LTggOC04IDggMy41OCA4IDgtMy41OCA4LTggOHoiLz48L3N2Zz4=&logoColor=white" alt="Claude Code Plugin" />
+  <img src="https://img.shields.io/badge/Claude_Code-Configured-8A2BE2?logo=data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0id2hpdGUiPjxwYXRoIGQ9Ik0xMiAyQzYuNDggMiAyIDYuNDggMiAxMnM0LjQ4IDEwIDEwIDEwIDEwLTQuNDggMTAtMTBTMTcuNTIgMiAxMiAyem0wIDE4Yy00LjQyIDAtOC0zLjU4LTgtOHMzLjU4LTggOC04IDggMy41OCA4IDgtMy41OCA4LTggOHoiLz48L3N2Zz4=&logoColor=white" alt="Claude Code Configured" />
   <img src="https://img.shields.io/badge/Astro-5-BC52EE?logo=astro&logoColor=white" alt="Astro 5" />
   <img src="https://img.shields.io/badge/Tailwind_CSS-v4-06B6D4?logo=tailwindcss&logoColor=white" alt="Tailwind CSS v4" />
   <img src="https://img.shields.io/badge/Cloudflare_Workers-F38020?logo=cloudflareworkers&logoColor=white" alt="Cloudflare Workers" />
@@ -14,7 +14,7 @@
 
 Start a conversation, shape a website. The Website Foundation is a production-ready template designed to be built together with [Claude Code](https://claude.ai/claude-code) — you describe what you want, Claude Code implements it across layouts, styles, routes, and tests, all at once. Out of the box you get a **blog**, **gallery**, **contact form** with email delivery, **password-protected pages**, **AI-powered image and video generation**, dark mode, SEO, and responsive design — all running on Cloudflare's free tier.
 
-The template ships with a complete Claude Code plugin: **10 slash commands**, **8 knowledge skills**, **2 specialized agents**, and **quality hooks** — giving Claude Code deep knowledge of the project's architecture, patterns, and conventions.
+The template ships with a complete Claude Code configuration: **18 skills**, **2 specialized agents**, and **quality hooks** — giving Claude Code deep knowledge of the project's architecture, patterns, and conventions.
 
 The sample brand is called "Wave Artisans." You'll replace it with your own name, logo, and content — or tell Claude Code `/rebrand` and describe your business.
 
@@ -24,16 +24,16 @@ The sample brand is called "Wave Artisans." You'll replace it with your own name
 
 Building with Claude Code means you describe your intent and get coherent, multi-file implementation. Not one file at a time — every file that needs to change, all following the same patterns, all building correctly.
 
-The plugin system makes this practical:
+The configuration makes this practical:
 
-- **10 slash commands** — `/new-post`, `/new-gallery-item`, `/rebrand`, `/deploy`, `/check`, and more. Each handles a complete workflow in one step.
-- **8 knowledge skills** — Architecture, styling patterns, content schemas, Cloudflare bindings, testing conventions. Claude Code understands this specific project, not just generic web development.
-- **2 specialized agents** — For complex multi-step tasks like full-site audits and component creation.
+- **10 task skills** — `/new-post`, `/new-gallery`, `/rebrand`, `/deploy`, `/preflight`, and more. Each handles a complete workflow in one step.
+- **8 reference skills** — Architecture, styling patterns, content schemas, Cloudflare bindings, testing conventions. Claude Code understands this specific project, not just generic web development.
+- **2 specialized agents** — For complex multi-step tasks like full-site audits and content creation.
 - **Quality hooks** — Automated checks that catch issues before they reach production.
 
 **Your first 5 minutes**: Clone the repo, open it in Claude Code, and say "rebrand this to my photography business called Lens & Light." Watch it update the site title, meta descriptions, header logo reference, footer text, homepage hero, and Open Graph metadata — all coherently, in one pass. Then say "add a portfolio page with client galleries." That's what building together looks like.
 
-This isn't a gimmick. Every implementation follows the documented patterns in CLAUDE.md, produces testable code, and builds correctly. The plugin gives Claude Code the project knowledge to make changes that are architecturally sound — not just syntactically correct.
+This isn't a gimmick. Every implementation follows the documented patterns in CLAUDE.md, produces testable code, and builds correctly. The configuration gives Claude Code the project knowledge to make changes that are architecturally sound — not just syntactically correct.
 
 ---
 
@@ -50,7 +50,7 @@ This isn't a gimmick. Every implementation follows the documented patterns in CL
 | **AI media tools** | Generate images and videos from text prompts (protected behind login) |
 | **SEO** | Sitemap, Open Graph tags, canonical URLs, meta descriptions |
 | **Performance** | Static pages are prerendered at build time; dynamic pages run at the edge |
-| **Claude Code plugin** | 10 commands, 8 skills, 2 agents, quality hooks — deep project knowledge for AI collaboration |
+| **Claude Code configuration** | 18 skills, 2 agents, quality hooks — deep project knowledge for AI collaboration |
 
 ---
 
@@ -88,7 +88,7 @@ Claude Code isn't a side feature — it's how this template is designed to be us
 
 ### How It Works
 
-The `CLAUDE.md` file in the project root gives Claude Code a complete understanding of the architecture — build commands, file conventions, component patterns, API route structure, testing approach, and common gotchas. The plugin adds slash commands for frequent tasks, knowledge skills for deeper context, and hooks for quality assurance. Together, they make Claude Code a partner that understands this specific project, not just a generic coding assistant.
+The `CLAUDE.md` file in the project root gives Claude Code a complete understanding of the architecture — build commands, file conventions, component patterns, API route structure, testing approach, and common gotchas. The `.claude/` directory adds skills for frequent tasks and deeper context, agents for complex workflows, and hooks for quality assurance. Together, they make Claude Code a partner that understands this specific project, not just a generic coding assistant.
 
 ---
 
@@ -566,11 +566,11 @@ tests/
   unit/                    # Unit tests
   integration/             # Integration tests
 .claude/
-  plugin.json              # Claude Code plugin manifest
-  commands/                # 10 slash commands
-  skills/                  # 8 knowledge skills
+  settings.json            # Hooks configuration
+  settings.local.json      # Permission settings
+  skills/                  # 18 skills (10 tasks + 8 reference)
   agents/                  # 2 specialized agents
-  hooks/                   # Quality hooks
+  hooks/                   # Quality hook scripts
 ```
 
 ---
@@ -810,7 +810,7 @@ bunx vitest run tests/unit/specific-test.test.ts
 - [Astro 5](https://astro.build) — Static site generator with hybrid SSR
 - [Tailwind CSS v4](https://tailwindcss.com) — Utility-first CSS with `@theme` directive and OKLCH colors
 - [Cloudflare Workers](https://workers.cloudflare.com) — Edge SSR, AI Gateway, Email Routing, Access
-- [Claude Code](https://claude.ai/claude-code) — AI creative partner with deep project knowledge via plugin system
+- [Claude Code](https://claude.ai/claude-code) — AI creative partner with deep project knowledge via `.claude/` configuration
 - [fal.ai](https://fal.ai) — Image generation (Seedream v4.5) and video generation (Seedance 1.5 Pro)
 - [jose](https://github.com/panva/jose) — JWT verification for Cloudflare Access
 - [Vitest](https://vitest.dev) — Unit and integration testing
